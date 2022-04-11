@@ -1,19 +1,31 @@
+let grid= 16*16;
 const container = document.querySelector('.container');
 
-for (i=0; i<256; i++) {
-    const content = document.createElement('div');
-    content.classList.add('content');
-    content.style.border = "thin solid gray";
-    container.appendChild(content); 
+function makeGrid() {
+    for (i=0; i<grid; i++) {
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.style.border = "thin solid gray";
+        container.appendChild(content); 
+    }
 }
+makeGrid();
 
-let cont = document.querySelectorAll('.content'); 
+let newContent = document.querySelectorAll('.content'); 
 
-cont.forEach((content)=> {
+newContent.forEach((content)=> {
     content.addEventListener("mouseover", function() {
         content.style.backgroundColor = 'black';
        
     });
 })
 
+const button = document.querySelector('button'); 
+button.addEventListener('click', () => {
+    clearGrid();
+})
 
+function clearGrid() {
+   let reset= document.querySelectorAll('.content'); 
+   reset.forEach((content) => content.style.backgroundColor = 'white');
+}
