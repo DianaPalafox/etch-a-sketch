@@ -5,13 +5,12 @@ function makeGrid(x) {
     for (i=0; i<grid; i++) {
         const content = document.createElement('div');
         content.classList.add('content');
-        content.style.border = "thin solid gray";
+        content.style.border = "thin solid purple";
         content.style.width = 600/x; 
         content.style.height = 600/x; 
         container.appendChild(content); 
     }
 }
-
 makeGrid(16);
 
 function colorBlack() {
@@ -23,13 +22,27 @@ function colorBlack() {
 })
 }
 
-colorBlack(); 
+function random(n){
+    return Math.floor(Math.random()*n); 
+}
 
+
+function generateRGBColor(){
+    return 'rgb(' + random(255)+ ','+random(255)+ ','+random(255)+')'; 
+}
+
+function randomColor() {
+    let newContent = document.querySelectorAll('.content'); 
+    newContent.forEach((content)=> {
+    content.addEventListener("mouseover", function() {
+        content.style.backgroundColor = generateRGBColor();
+        });
+    })
+}
 
 function clearGrid() {
    let reset= document.querySelectorAll('.content'); 
    reset.forEach((content) => content.style.backgroundColor = 'white');
-   makeNewGrid();
 }
 
 function removeGrid() {
@@ -38,7 +51,6 @@ function removeGrid() {
     content.remove();
     });
 }
-
 
 function makeNewGrid(){
     removeGrid(); 
@@ -49,6 +61,6 @@ function makeNewGrid(){
     else {
         container.style.gridTemplateColumns = `repeat(${x},auto)`;
         makeGrid(x);
-        colorBlack(); 
+       
     }
 }
